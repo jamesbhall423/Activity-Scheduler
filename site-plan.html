@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="utf-8" >
+  <title>Site Plan</title>
+  <link type="text/css" rel="stylesheet" href="styles/site-plan.css" >
+</head>
+
+<body>
+  <header>
+    <h1>Group Meet Site Plan</h1>
+    <h2>James Hall</h2>
+    <h2>WDD 130-05</h2>
+  </header>
+  <main>
+    <hr>
+    <h2>Overview</h2>
+    <h3>Purpose</h3>
+    <p>
+      The purpose of this site is to coordinate schedules with friends and acquaintances,
+      to allow any member of a group to propose an activity that every member can attend,
+      and to carry notifications of said proposals to other members of the group.
+    </p>
+
+    <h3>Audience</h3>
+    <p>
+      <!--The audicence should be as broad as possible. -->
+      The audience consists of everyone 12 and older.
+      The idea is to reach out to groups of casually connected individuals, rather than formal clubs where people are free to join or leave.
+      Most people may interact with this on a mobile device.
+      Some of the group meetings may be between different kinds of people.
+    </p>
+
+    <hr>
+    <h2>Branding</h2>
+    <h3>Website Logo</h3>
+    <!-- Replace this with some sort of logo for your site.  A logo can be as simple as the name of your site in a nice font :) -->
+    <!--<img src="https://byui-wdd.github.io/wdd130/rafting_images/dryoarlogo.png" alt="Logo image">-->
+    <hr>
+    <h2>Style Guide</h2>
+
+
+    <h3>Color Palette</h3>
+    <!--  The colors you choose for a website are one of the most important decisions you will make. Follow the instructions on the activity in Canvas then return and replace the color codes below with the hex color codes (the 6 digit numbers that show at the bottom of each color) for the colors you have chosen below.  You should have at least 2 colors but do not have to fill in all 4 if you do not need them.  -->
+
+    <!-- Copy and paste the URL to your finished palette below. Replace the href value that is there with yours. Make sure to paste it into both the href value and the content text of the <a> tag -->
+    <p>Palette URL:</p>
+    <a href="https://coolors.co/8cff72-b07200-001701-130a00-e4c3d5"
+      target="_blank">https://coolors.co/8cff72-b07200-001701-130a00-e4c3d5</a>
+
+    <table class="colors">
+      <tr>
+        <th>Primary</th>
+        <th>Secondary</th>
+        <th>Accent 1</th>
+        <th>Accent 2</th>
+      </tr>
+      <!-- Replace the numbers in the boxes below with your hex color codes. Then switch to the site-plan.css file and change your colors there as well. -->
+      <tr>
+        <td class="primary">#8cff72</td>
+        <td class="secondary">#b07200</td>
+        <td class="accent1">#001701</td>
+        <td class="accent2">#130a00</td>
+      </tr>
+    </table>
+
+
+    <h3>Typography</h3>
+    <!-- Choose a font for your paragraphs (body copy) and headlines. What font(s) have you chosen? Think also about which of your colors above you might use for background and font colors. -->
+
+    <h4>
+      Heading Font: Merriweather
+      <!-- change this -->
+    </h4>
+    <h4>
+      Paragraph Font: Roboto
+      <!-- change this -->
+    </h4>
+    <h3>Normal paragraph example</h3>
+    <p>
+      Hello, this is a normal paragraph.
+       It should be okay to read this. It will be boring, though.
+        This is just a test to see how the fonts work.
+    </p>
+    <h3>Colored paragraph example</h3>
+    <p class="colored">
+      Hello, this is a colored paragraph.
+       It should be okay to read this.
+       It should be slightly more interesting than the other paragraph.
+        This is just a test to see how the fonts and colors work.
+    </p>
+
+
+    <h3>Navigation</h3>
+    <!-- Think about how you want your navigation bar to look. In the site-plan.css file change the colors to your colors to get the look you desire. -->
+    <nav>
+      <a href="site-plan.html">Site Plan</a>
+      <a href="other-users.html">Other Users</a>
+      <a href="notification-center.html">Notification Center</a>
+      <a href="schedule-rules.html">Schedule Rules</a>
+      <a href="generic_page.html">Generic Page</a>
+    </nav>
+    <hr>
+    <h2>Content</h2>
+    <div class="content">
+        <p>The site requires five things:</p>
+        <ol>
+          <li>Login</li>
+          <li>Other User Authentication</li>
+          <li>Rules for availability</li>
+          <li>The activity scheduler module</li>
+          <li>Notification center</li>
+        </ol>
+        <p>These are defined as follows</p>
+        <h3>Login</h3>
+        <p>
+          Not to be implemented at this point in time.
+          However, each user needs to have their own account.
+          Each account will need to have the following information:
+        </p>
+        <ol>
+          <li>Their schedule</li>
+          <li>List of users who they have authorized to see their schedule and send them notifications</li>
+          <li>List of users who have authorized them</li>
+          <li>The activity scheduler module</li>
+          <li>Notifications received</li>
+        </ol>
+        <h3>Other User Authentication</h3>
+        <p>
+          This represents a place where users can authorize other users to contact them and view their schedule.
+          At the top, we have an image for the user and their username.
+          Then we text input for the name of the user to add and a button to add them.
+          Below that we have of list of authorized individuals each one as follows:
+        </p>
+        <ul>
+          <li>The username</li>
+          <li>An icon to represent whether they've reciprocated.</li>
+          <li>A checkbox to authorize or de-authorize that individual</li>
+          <li>A deletion button.</li>
+        </ul>
+        <h3>Rules for availability</h3>
+        <p>
+          A rule is composed of the following:
+        </p>
+        <ul>
+          <li>A start date and an end date</li>
+          <li>Whether it is on or off on each day of the week</li>
+          <li>Whether it represents available time or unavailable time.</li>
+          <li>A start time hr:mn:am/pm and an end time</li>
+        </ul>
+        <p>
+          The rule page will be composed of a button to add rules, and a list of rules such that 
+        </p>
+        <ul>
+          <li>Drop down menus for the year, month, and day of the start date and also drop down menus for the year month, and day of the end date</li>
+          <li>Drop down menus for start hour, 30 minute interval, with am/pm being kept track by using 24-hour time, and also drop down menus for the end time. (Updated)</li>
+          <li>A checkbox to indicate whether the rule is active</li>
+          <li>A delete icon to remove the rule (ideally should pop up confirmation window)</li>
+        </ul>
+        <h3>Notification Center</h3>
+        <p>This page will have a list of activities, where each activity will have the following.</p>
+        <ul>
+          <li>Date</li>
+          <li>Start time and end time</li>
+          <li>Name or description.</li>
+          <li>Delete button</li>
+        </ul>
+        <h3>Overall</h3>
+        <p>Every page will have a link to the other pages in the header and a copywrite in the footer. (updated)</p>
+        <h3>Images</h3>
+        <p>The site should have the following images</p>
+        <ol>
+          <li><img src="https://www.freeiconspng.com/uploads/check-confirm-ok-button-tick-yes-icon--18.png" width="35" alt="check, confirm, ok button, tick, yes icon "><a href="https://www.freeiconspng.com/img/3107">check, confirm, ok button, tick, yes icon </a></li>
+          <li><img src="https://www.freeiconspng.com/uploads/add-1-icon--flatastic-1-iconset--custom-icon-design-0.png" width="35" alt="Add 1 Icon | Flatastic 1 Iconset | Custom Icon Design"><a href="https://www.freeiconspng.com/img/2459">Add 1 Icon | Flatastic 1 Iconset | Custom Icon Design</a></li>
+          <li><img src="https://www.freeiconspng.com/uploads/delete-icon-5.png" width="35" alt="Delete Icon"><a href="https://www.freeiconspng.com/img/7114">Delete Icon</a></li>
+          <li><img src="https://www.freeiconspng.com/uploads/warning-stop-and-do-not-sign-icon-16.jpg" width="35" alt="Warning, stop and DO NOT sign icon"><a href="https://www.freeiconspng.com/img/20458">Warning, stop and DO NOT sign icon</a></li>
+        </ol>
+    </div>
+    <div class = "wireframe">
+      <h2>Wireframes</h2>
+      <img src = "images/AuthenticationWireframe.png" alt="page 1 wireframe">
+      <p>
+        The header for the first wireframe is incorrect. It should be the same as the others.
+      </p>
+      <img src = "images/NotificationWireframe.png" alt="page 2 wireframe">
+      <img src = "images/RulesWireframe.png" alt="page 3 wireframe">
+      <p>
+        Using standard html date and time inputs is acceptable here. The Date and Time labels should be positioned where the yr, mth, ect tags are.
+      </p>
+    </div>
+    <!--
+      <h2>Site Map</h2>
+    <div class="sitemap">
+      <div class="sm-home">Home</div>
+      <div class="sm-page2">
+        [Page2]
+      </div>
+      <div class="sm-page3">Contact Us</div>
+
+      <div class="top">&nbsp;</div>
+      <div class="left">&nbsp;</div>
+      <div class="right">&nbsp;</div>
+    </div>
+    <hr>
+    <h2>Wireframes</h2>
+
+    <h3>Home</h3>
+
+    <img src="https://byui-wdd.github.io/wdd130/rafting_images/wireframe_home.png" alt="home page wireframe">
+
+    <h3>[Page 2]</h3>
+
+  -->
+  </main>
+</body>
+
+</html>

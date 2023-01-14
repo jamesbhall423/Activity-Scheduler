@@ -1,0 +1,222 @@
+
+/* if you are using any Google fonts change the font names below to your fonts. 
+Any spaces in your font name should be replaced with a +. 
+Fonts are separated by a & */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Roboto&display=swap');
+
+:root {
+  /* change the values below to your colors from your palette https://coolors.co/8cff72-b07200-001701-130a00-e4c3d5*/
+  --primary-color: #8cff72   ;
+  --secondary-color: #b07200 ;
+  --accent1-color: #001701;
+  --accent2-color: #130a00;
+  --accent3-color: #e4c3d5;
+
+  /* change the values below to your chosen font(s) */
+  --heading-font: "Merriweather", Georgia, serif;
+  --paragraph-font: "Roboto", Arial, sans-serif;
+
+  /* these colors below should be chosen from among your palette colors above */
+  --headline-color-on-white: #001701;  /* headlines on a white background */ 
+  --headline-color-on-color: #8cff72; /* headlines on a colored background */ 
+  --paragraph-color-on-white: #b07200; /* paragraph text on a white background */ 
+  --paragraph-color-on-color: #e4c3d5; /* paragraph text on a colored background */ 
+  --paragraph-background-color: #130a00  ;
+  --nav-link-color: #8cff72;
+  --nav-background-color: #001701;
+  --nav-hover-link-color: #e4c3d5;
+  --nav-hover-background-color: #001701;
+}
+
+img {
+  width: 40px;
+}
+input[type="image"] {
+  width: 40px;
+}
+body {
+  display: grid;
+  overflow: hidden;
+  background-color: var(--accent3-color);
+}
+h1, h2{
+  font-family: var(--heading-font);
+}
+p, input, h3, h4, h5, h6  {
+  font-family: var(--paragraph-font);
+}
+.content {
+  max-width: 300px;
+  font-size: 0.8em;
+  justify-self: center;
+  border: 1px solid black;
+  background-color: var(--primary-color);
+}
+nav {
+  background-color: var(--nav-background-color);
+  text-align: center;
+}
+nav  {
+  list-style-type: none;
+  display: flex;
+}
+nav a {
+  padding: 0.5em;
+  text-decoration: none;
+  padding: 10px;
+  text-decoration: underline;
+}
+nav a:link, nav a:visited {
+  color: var(--nav-link-color);
+}
+nav a:hover {
+  color: var(--nav-hover-link-color);
+  background-color: var(--nav-hover-background-color);
+}
+.title {
+  font-size: 1.5em;
+  text-align: center;
+  margin: 0 auto;
+  color: var(--paragraph-color-on-color);
+  background-color: var(--paragraph-background-color);
+}
+.main_input {
+  margin: 0 auto;
+  background-color: var(--secondary-color);
+}
+input {
+  width: 100%;
+}
+input[type="checkbox"] {
+  height: 20px;
+}
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+.scroll-list {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 300px;
+  margin: 0 auto;
+}
+footer {
+  display: flex;
+  background-color: var(--nav-background-color);
+}
+.copywrite {
+  margin-left: 0;
+  margin-right: auto;
+  color: white;
+}
+.site-plan-footer-link {
+  margin-right: 0;
+  margin-left: auto;
+  color: var(--nav-link-color);
+  text-decoration: underline;
+}
+.site-plan-footer-link a:link {
+  color: var(--nav-link-color);
+}
+.site-plan-footer-link a:visited {
+  color: var(--nav-link-color);
+}
+.site-plan-footer-link a:hover {
+  color: var(--nav-hover-link-color);
+  background-color: var(--nav-hover-background-color);
+}
+
+/* schedule-rules */
+.rules_labels {
+  display: grid;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+}
+.rules_form {
+  display: grid;
+  grid-template-columns: 3fr 0.5fr 0.5fr;
+  width: 90%;
+  justify-self: center;
+}
+.From, .To {
+  display: grid;
+  grid-column: 1/2;
+  grid-template-columns: 1.5fr 2fr 2fr;
+}
+.From {
+  grid-row: 1/2;
+}
+.To {
+  grid-row: 2/3;
+}
+#schedule_rules .checkbox {
+  grid-row: 1/3;
+  grid-column: 2/3;
+  align-self: center;
+}
+#schedule_rules .image {
+  grid-row: 1/3;
+  grid-column: 3/4;
+  align-self: center;
+}
+#schedule_rules .main_input, .rule {
+  display: grid;
+}
+
+/*Notification center*/
+.notification_labels {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.7fr;
+  border: 1px solid var(--paragraph-background-color);;
+}
+
+.notification {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.5fr;
+  border: 1px solid var(--paragraph-background-color);;
+}
+
+/*Other users*/
+.other_user_labels {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 0.8fr;
+  padding: 0px;
+  margin-bottom: 15px;
+}
+.other_user_labels h3 {
+  margin-top: 0px;
+  margin-bottom: -15px;
+}
+#overall_authorized_label {
+  grid-column: 2/4;
+  grid-row: 1/2;
+}
+#you_authorized_label {
+  text-align: center;
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+#them_authorized_label {
+  grid-column: 3/4;
+  grid-row: 2/3;
+}
+#add_remove_label {
+  grid-column: 4/5;
+  grid-row: 1/3;
+}
+.other_user_add {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 0.8fr;
+  border: 1px solid var(--paragraph-background-color);
+  align-items: center;
+}
+.user-item {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 0.8fr;
+  border: 1px solid var(--paragraph-background-color);
+  align-items: center;
+}
+.user-item p {
+  font-size: 1.2em;
+}
