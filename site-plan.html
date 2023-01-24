@@ -16,11 +16,19 @@
   <main>
     <hr>
     <h2>Overview</h2>
+    <h3>Prior Work</h3>
+    <p>
+      This site is a full implementation of the <a href = https://jamesbhall423.github.io/wdd130/activity_scheduler/site-plan.html>Wdd130 activity scheduler site</a>
+    </p>
     <h3>Purpose</h3>
     <p>
       The purpose of this site is to coordinate schedules with friends and acquaintances,
       to allow any member of a group to propose an activity that every member can attend,
       and to carry notifications of said proposals to other members of the group.
+    </p>
+    <p>
+      The website is not a general communications application.
+      Its utility is limited to when activities are scheduled, not what those activities are.
     </p>
 
     <h3>Audience</h3>
@@ -30,21 +38,17 @@
       The idea is to reach out to groups of casually connected individuals, rather than formal clubs where people are free to join or leave.
       Most people may interact with this on a mobile device.
       Some of the group meetings may be between different kinds of people.
+      For groups of around 4-5.
     </p>
 
     <hr>
     <h2>Branding</h2>
     <h3>Website Logo</h3>
-    <!-- Replace this with some sort of logo for your site.  A logo can be as simple as the name of your site in a nice font :) -->
-    <!--<img src="https://byui-wdd.github.io/wdd130/rafting_images/dryoarlogo.png" alt="Logo image">-->
     <hr>
     <h2>Style Guide</h2>
 
 
     <h3>Color Palette</h3>
-    <!--  The colors you choose for a website are one of the most important decisions you will make. Follow the instructions on the activity in Canvas then return and replace the color codes below with the hex color codes (the 6 digit numbers that show at the bottom of each color) for the colors you have chosen below.  You should have at least 2 colors but do not have to fill in all 4 if you do not need them.  -->
-
-    <!-- Copy and paste the URL to your finished palette below. Replace the href value that is there with yours. Make sure to paste it into both the href value and the content text of the <a> tag -->
     <p>Palette URL:</p>
     <a href="https://coolors.co/8cff72-b07200-001701-130a00-e4c3d5"
       target="_blank">https://coolors.co/8cff72-b07200-001701-130a00-e4c3d5</a>
@@ -56,7 +60,7 @@
         <th>Accent 1</th>
         <th>Accent 2</th>
       </tr>
-      <!-- Replace the numbers in the boxes below with your hex color codes. Then switch to the site-plan.css file and change your colors there as well. -->
+      
       <tr>
         <td class="primary">#8cff72</td>
         <td class="secondary">#b07200</td>
@@ -67,15 +71,13 @@
 
 
     <h3>Typography</h3>
-    <!-- Choose a font for your paragraphs (body copy) and headlines. What font(s) have you chosen? Think also about which of your colors above you might use for background and font colors. -->
+    
 
     <h4>
       Heading Font: Merriweather
-      <!-- change this -->
     </h4>
     <h4>
       Paragraph Font: Roboto
-      <!-- change this -->
     </h4>
     <h3>Normal paragraph example</h3>
     <p>
@@ -93,7 +95,7 @@
 
 
     <h3>Navigation</h3>
-    <!-- Think about how you want your navigation bar to look. In the site-plan.css file change the colors to your colors to get the look you desire. -->
+    
     <nav>
       <a href="site-plan.html">Site Plan</a>
       <a href="other-users.html">Other Users</a>
@@ -110,7 +112,7 @@
           <li>Other User Authentication</li>
           <li>Rules for availability</li>
           <li>The activity scheduler module</li>
-          <li>Notification center</li>
+          <li>Event center</li>
         </ol>
         <p>These are defined as follows</p>
         <h3>Login</h3>
@@ -124,8 +126,15 @@
           <li>List of users who they have authorized to see their schedule and send them notifications</li>
           <li>List of users who have authorized them</li>
           <li>The activity scheduler module</li>
-          <li>Notifications received</li>
+          <li>Events received</li>
         </ol>
+        <p>
+          There needs to be an account page, as well as a login page.
+          The account page at least needs a logout and a delete account.
+          More complicated account proceedures include changing passwords
+           and protection against destructive actions (like accidentally deleting account).
+          These can be implemented if time permits.
+        </p>
         <h3>Other User Authentication</h3>
         <p>
           This represents a place where users can authorize other users to contact them and view their schedule.
@@ -158,13 +167,24 @@
           <li>A checkbox to indicate whether the rule is active</li>
           <li>A delete icon to remove the rule (ideally should pop up confirmation window)</li>
         </ul>
-        <h3>Notification Center</h3>
+        <h3>Event Center</h3>
         <p>This page will have a list of activities, where each activity will have the following.</p>
         <ul>
           <li>Date</li>
           <li>Start time and end time</li>
           <li>Name or description.</li>
+          <li>Names of other participants.</li>
           <li>Delete button</li>
+        </ul>
+        <h3>Actitity Scheduler Module</h3>
+        <p>
+          This represents a place where people actually see availability and propose activities.
+          Use requires adding all group members, setting the date, and scrolling down to the available time.
+        </p>
+        <ul>
+          <li>Scroll listing group members checkbox if in group</li>
+          <li>Scroll for times at 30 minute intervals, colored differently based on availability</li>
+          <li>Clicking or tapping on time brings up activity schedule form</li>
         </ul>
         <h3>Overall</h3>
         <p>Every page will have a link to the other pages in the header and a copywrite in the footer. (updated)</p>
@@ -179,39 +199,109 @@
     </div>
     <div class = "wireframe">
       <h2>Wireframes</h2>
-      <img src = "images/AuthenticationWireframe.png" alt="page 1 wireframe">
+      <img src = "images/AuthenticationWireframe.png" alt="other authentication wireframe">
+      <img src = "images/Event Center Wireframe.png" alt="event notification center wireframe">
+      <img src = "images/Rules Wireframe2.png" alt="availability rules wireframe">
+      <img src = "images/Account Wireframe.png" alt="account wireframe">
+      <img src = "images/Activity Scheduler Wireframe.png" alt="activity scheduler wireframe">
+      <img src = "images/Login Wireframe.png" alt="login wireframe">
+      <img src = "images/Event Creation Popup Wireframe.png" alt="Event Creation Popup Wireframe ">
       <p>
-        The header for the first wireframe is incorrect. It should be the same as the others.
-      </p>
-      <img src = "images/NotificationWireframe.png" alt="page 2 wireframe">
-      <img src = "images/RulesWireframe.png" alt="page 3 wireframe">
-      <p>
-        Using standard html date and time inputs is acceptable here. The Date and Time labels should be positioned where the yr, mth, ect tags are.
+        All pages should use same standard five-link nav bar, regardless of wireframe.
+        Link to site plan kept in footer as it could help visitors understand the site.
       </p>
     </div>
-    <!--
-      <h2>Site Map</h2>
-    <div class="sitemap">
-      <div class="sm-home">Home</div>
-      <div class="sm-page2">
-        [Page2]
-      </div>
-      <div class="sm-page3">Contact Us</div>
-
-      <div class="top">&nbsp;</div>
-      <div class="left">&nbsp;</div>
-      <div class="right">&nbsp;</div>
+    <div class = "Responsiveness">
+      <h2>Responsiveness</h2>
+      <h3>Login page</h3>
+      <p>
+        The natural starting place is the login page.
+        Logging in should take the user to the event center page.
+        When a user creates an account, send them to the rules page.
+        If logged in on page, user should remain logged in when clicking on in-site links.
+        When logged in, each page should start by bringing in the relavant data.
+      </p>
+      <h3>Account page</h3>
+      <p>
+        The account page has two buttons.
+        The logout button should logout the user and return the user to the login page.
+        The remove account button should remove the user's account from the database,
+         remove all references to that user in "other user authentication"
+         and the associated section of the activity scheduler page.
+        It should not remove the references in the event center.
+      </p>
+      <h3>Other User Authorization Page</h3>
+      <p>
+        Upon loading, all list entries should be checked against the database.
+        All entries that reflect non-existent users should be removed.
+        For all valid entries, "authorized by them" reflects whether that user
+         has this user listed and authorized in the appropriate section.
+      </p>
+      <p>
+        When add user is hit, the name should be checked against the database,
+         and if it is present, a new entry should be added, with "authorized by you"
+         reflecting user input and "authorized by them" reflecting the value retrieved
+         from the database.
+        The database should be updated to reflect the new authorization.
+      </p>
+      <p>
+        Checking or unchecking "authorized by you" on an established list entry
+         should be reflected in the database.
+      </p>
+      <p>
+        Hitting the remove button on any user should remove that user from the list
+         and should be reflected in the database.
+      </p>
+      <h3>Rules for Availability Page</h3>
+      <p>
+        Hitting the "new" button should create a new entry on the list and the database.
+        Changes on each rule should be reflected in the database.
+        Hitting the delete button on a rule should remove it from the list and the database.
+      </p>
+      <h3>Activity Scheduler Page</h3>
+      <p>
+        List on top comes from other authorized users in the user account that are authorized both ways.
+        All deselected by default: changes here alter highlights below.
+      </p>
+      <p>
+        User selecting date icon filters the display below to that date.
+        User selecting time icon causes display to start at that time.
+      </p>
+      <p>
+        Each time in the timescroll portion to be highlighted if it lies within the user's rules
+         and all of the selected users' rules.
+        Selecting the plus icon within one of these highlighted times brings up the add event pop-up.
+      </p>
+      <p>
+        If the "create event" button is hit in the add event pop-up,
+         an event object will be created with the given specifications and added to the user's event list
+         and the selected other users' event lists.
+      </p>
+      <h3>Event Center</h3>
+      <p>
+        During loading, events should be tested to see if they are over.
+        If they are over, they should be removed from the list and the user account.
+      </p>
+      <p>
+        When a page is loading, if a user has unread events,
+         the event center link in the nav should highlight.
+        If a user has events in the event center, but all are read,
+         the event center link should highlight a different way.
+      </p>
+      <p>
+        Clicking the delete icon on an event removes that event from the list and the user account.
+      </p>
     </div>
-    <hr>
-    <h2>Wireframes</h2>
-
-    <h3>Home</h3>
-
-    <img src="https://byui-wdd.github.io/wdd130/rafting_images/wireframe_home.png" alt="home page wireframe">
-
-    <h3>[Page 2]</h3>
-
-  -->
+    <div>
+      <h2>Data Schema</h2>
+      <img class = "DataSchema" src = "images/Firebase Data Schema.jpg" alt = "Firebase Data Schema">
+      <!--
+        <img src = "images/Overall Database Schema.png" alt = "Overall Data Schema">
+        <img src = "images/User Account Data Schema.png" alt = "User Account Data Schema">
+        <img src = "images/Rule Object Data Schema.png" alt = "Rule Object Data Schema">
+        <img src = "images/Event Data Schema.png" alt = "Event Object Data Schema">
+    -->
+    </div>
   </main>
 </body>
 
