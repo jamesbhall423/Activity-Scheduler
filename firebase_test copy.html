@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Firebase test</title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <label for="Email">Email</label>
+                <input name="Email" id="Email" type="Email" placeholder="Email" />
+            </div>
+            <div>
+                <label for="Password">Password</label>
+                <input name="Password" id="Password" type="Password" placeholder="Password" />
+            </div>
+            <div>
+                <label for="user_id">User ID</label>
+                <input name="user_id" id="User_ID" type="Text" placeholder="user id" />
+            </div>
+            <button class="create_account_button" onclick="createAccount()">Create Account</button>
+            <button class="login_button" onclick="login()">Login</button>
+            <button class="logout_button" onclick="logout()">Logout</button>
+            <button class="save_button" onclick="save()">save</button>
+            <button class="update_button" onclick="update()">update</button>
+            <button class="update_user_button" onclick="update_user()">update user</button>
+            <button class="delete_button" onclick="remove()">remove</button>
+            <button class="fecth_button" onclick="fetch()">fetch</button>
+            <button class="fecth_specific_button" onclick="fetch_specific()">fetch specific</button>
+            <button class="read_button" onclick="read_all_data()">read_in_all</button>
+        </div>
+    </body>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
+    <script src = "firebase_test.js"></script>
+</html>
