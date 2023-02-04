@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Activity</title>
+    <link type="text/css" rel="stylesheet" href="styles/activity-scheduler.css" >
+</head>
+<body>
+    <div class = "content">
+        <header>
+            <nav class="main_nav">
+                <a href="activity-scheduler.html">Activity Scheduler</a>
+                <a href="other-users.html">Other Users</a>
+                <a href="schedule-rules.html">Schedule Rules</a>
+                <a href="notification-center.html">Event Center</a>
+                <a href="account.html">Account Info</a>
+            </nav> 
+        </header>
+        <section class = "main" id = "activity-scheduler">
+            <ul class = "scroll-list" id = "other_activity_members">
+                <li>
+                    <form>
+                        <label>Person 1</label>
+                        <input id="Person 1" type="checkbox"></input>
+                    </form>
+                </li>
+                <li>
+                    <form>
+                        <label>Person 2</label>
+                        <input id="Person 2" type="checkbox"></input>
+                    </form>
+                </li>
+                <li>
+                    <form>
+                        <label>Person 3</label>
+                        <input id="Person 3" type="checkbox"></input>
+                    </form>
+                </li>
+            </ul>
+            <form class="title" id="activity_scheduler_title">
+                <p>Activity Scheduler</p>
+                <input type = "date" id = "activity_date"/>
+                <input type = "time" id = "activity_time"/>
+            </form>
+            <ul class = "scroll-list" id = "activity_times">
+                <li>
+                    <form>
+                        <label>11:30 am</label>
+                        <input type = "image" src = "images/output-onlinepngtools-add.png" alt="create activity">
+                    </form>
+                </li>
+                <li>
+                    <form>
+                        <label>12:00 pm</label>
+                    </form>
+                </li>
+            </ul>
+        </section>
+        <section class = "create_activity">
+            <form>
+                <h1 class = "title">Create Activity</h1>
+                <div class = "activity_details">
+                    <label>Start</label>
+                    <label id = "activity_start">1/1 11:30 pm</label>
+                    <label>End</label>
+                    <input type = "time" id = "activity_end">
+                    <label>Description</label>
+                    <input type = "text" id = "activity_description">
+                </div>
+                <div class = "activity_people">
+                    <h3>People</h3>
+                    <p id = "activity_participants">This is a list of people</p>
+                </div>
+                <div class = "activity_buttons">
+                    <button id = "activity_cancel">Cancel</button>
+                    <button id = "activity_create">Create Event</button>
+                </div>
+            </form>
+        </section>
+        <footer>
+            <div class = "copywrite">
+                &copy James Hall 2022
+            </div>
+            <div class = "site-plan-footer-link">
+                <a href = "site-plan.html">
+                    Site Plan
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

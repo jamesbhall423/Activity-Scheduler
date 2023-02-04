@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Scheduler</title>
+    <link type="text/css" rel="stylesheet" href="styles/activity-scheduler.css" >
+</head>
+<body>
+    <div class = "content">
+        <header>
+            <nav class="main_nav">
+            </nav> 
+        </header>
+        <section class = "main" id = "signin">
+            <h1 class="title">Activity Scheduler</h1>
+            <form class="signin">
+                <div class = "labeled_input">
+                    <label for="Email">Email</label>
+                    <input name="Email" id="Email" type="Email" placeholder="Email" />
+                </div>
+                <div class = "labeled_input">
+                    <label for="Password">Password</label>
+                    <input name="Password" id="Password" type="Password" placeholder="Password" />
+                </div>
+                <div>
+                    <button class="create_account_button" onclick="createAccount()">Create Account</button>
+                    <button class="login_button" onclick="login()">Login</button>
+                </div>
+            </form>
+        </section>
+        <footer>
+            <div class = "copywrite">
+                &copy James Hall 2022
+            </div>
+            <div class = "site-plan-footer-link">
+                <a href = "site-plan.html">
+                    Site Plan
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
