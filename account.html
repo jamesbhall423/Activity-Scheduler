@@ -19,12 +19,29 @@
             </nav> 
         </header>
         <section class = "main" id = "account">
-            <form class="account_input">
-                <button>Logout</button>
-                <button>Delete Account</button>
+            <div class="account_input">
+                <button onclick="logout()">Logout</button>
+                <button onclick="deleteAccount()">Delete Account</button>
                 <button></button>
                 <button></button>
-            </form>
+            </div>
+        </section>
+        <section class = "main" id = "finalizeDeletion">
+            <h1 class="title">Delete Account?</h1>
+            <div class="signin">
+                <div class = "labeled_input">
+                    <label for="Email">Email</label>
+                    <input name="Email" id="Email" type="Email" placeholder="Email" />
+                </div>
+                <div class = "labeled_input">
+                    <label for="Password">Password</label>
+                    <input name="Password" id="Password" type="Password" placeholder="Password" />
+                </div>
+                <div>
+                    <button class="delete_account_button" onclick="finalizeAccountDeletion()">Delete Account</button>
+                    <button class="cancel_deletion_button" onclick="cancelDeletion()">Cancel</button>
+                </div>
+            </div>
         </section>
         <footer>
             <div class = "copywrite">
@@ -40,5 +57,10 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
+    <script src = "firebase_config.js"></script>
+    <script src = "login_identifier.js"></script>
+    <script src = "account.js"></script>
+    <script src = "redirect.js"></script>
+    <script src = "logout_redirect.js"></script>
 </body>
 </html>

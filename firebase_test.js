@@ -27,7 +27,8 @@ const login = () => {
     const email = document.getElementById("Email").value;
     const password = document.getElementById("Password").value;
     auth.signInWithEmailAndPassword(email, password).then((res) => {
-        console.log(res.user)
+        console.log(res.user);
+        redirect();
     })
     .catch((err) => {
         console.log(err.code);
@@ -166,4 +167,7 @@ const read_all_data = () => {
     } else {
         console.log("Not signed in");
     }
+};
+const redirect = () => {
+    window.location.replace("http://127.0.0.1:5500/firebase_test copy.html");
 };

@@ -15,7 +15,7 @@
         </header>
         <section class = "main" id = "signin">
             <h1 class="title">Activity Scheduler</h1>
-            <form class="signin">
+            <div class="signin">
                 <div class = "labeled_input">
                     <label for="Email">Email</label>
                     <input name="Email" id="Email" type="Email" placeholder="Email" />
@@ -28,7 +28,7 @@
                     <button class="create_account_button" onclick="createAccount()">Create Account</button>
                     <button class="login_button" onclick="login()">Login</button>
                 </div>
-            </form>
+            </div>
         </section>
         <footer>
             <div class = "copywrite">
@@ -44,6 +44,10 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
+    <script src = "firebase_config.js"></script>
+    <script src = "login_identifier.js"></script>
     <script src = "redirect.js"></script>
+    <script src = "login_redirect.js"></script>
+    <script src = "account.js"></script>
 </body>
 </html>
