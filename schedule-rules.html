@@ -20,181 +20,17 @@
         </header>
         <section class = "main" id = "schedule_rules">
             <h1 class="title">Schedule Rules</h1>
-            <form class="main_input">
+            <div class="main_input">
                 <div class = "rules_labels">
-                    <button>New</button>
+                    <button onclick = "addInputRule()">New</button>
                     <h3>Date</h3>
                     <h3>Time</h3>
                     <h3>Active?</h3>
                     <h3>Delete</h3>
                 </div>
-            </form>
-            <ul class = "scroll-list">
-                <li>
-                    <form class="rule">
-                        <div class="rules_form">
-                            <div class="From">
-                                <h3>From</h3>
-                                <input type="date">
-                                <input type="time">
-                            </div>
-                            <div class="To">
-                                <h3>To</h3>
-                                <input type="date">
-                                <input type="time">
-                            </div>
-                            <div class = "checkbox">
-                                <input type="checkbox">
-                            </div>
-                            <div class = "image">
-                                <input type="image" src="images/delete.png" alt="delete rule">
-                            </div>
-                        </div>
-                        <div class="weekday_rules">
-                            <div class="on">
-                                <h3>On</h3>
-                            </div>
-                            <div class="rule_weekday">
-                                <label>S</label>
-                                <input type="checkbox" id = "Sunday1">
-                            </div>
-                            <div class="rule_weekday">
-                                <label>M</label>
-                                <input type="checkbox" id = "Monday1">
-                            </div>
-                            <div class="rule_weekday">
-                                <label>T</label>
-                                <input type="checkbox" id = "Tuesday1">
-                            </div>
-                            <div class="rule_weekday">
-                                <label>W</label>
-                                <input type="checkbox" id = "Wednesday1">
-                            </div>
-                            <div class="rule_weekday">
-                                <label>T</label>
-                                <input type="checkbox" id = "Thursday1">
-                            </div>
-                            <div class="rule_weekday">
-                                <label>F</label>
-                                <input type="checkbox" id = "Friday1">
-                            </div>
-                            <div class="rule_weekday">
-                                <label>S</label>
-                                <input type="checkbox" id = "Saturday1">
-                            </div>
-                        </div>
-                    </form>
-                </li>
-                <li>
-                    <form class="rule">
-                        <div class="rules_form">
-                            <div class="From">
-                                <h3>From</h3>
-                                <input type="date">
-                                <input type="time">
-                            </div>
-                            <div class="To">
-                                <h3>To</h3>
-                                <input type="date">
-                                <input type="time">
-                            </div>
-                            <div class = "checkbox">
-                                <input type="checkbox">
-                            </div>
-                            <div class = "image">
-                                <input type="image" src="images/delete.png" alt="delete rule">
-                            </div>
-                        </div>
-                        <div class="weekday_rules">
-                            <div class="on">
-                                <h3>On</h3>
-                            </div>
-                            <div class="rule_weekday">
-                                <label class = "ruleday_label">S</label>
-                                <input type="checkbox" id = "Sunday2">
-                            </div>
-                            <div class="rule_weekday">
-                                <label class = "ruleday_label">M</label>
-                                <input type="checkbox" id = "Monday2">
-                            </div>
-                            <div class="rule_weekday">
-                                <label>T</label>
-                                <input type="checkbox" id = "Tuesday2">
-                            </div>
-                            <div class="rule_weekday">
-                                <label>W</label>
-                                <input type="checkbox" id = "Wednesday2">
-                            </div>
-                            <div class="rule_weekday">
-                                <label>T</label>
-                                <input type="checkbox" id = "Thursday2">
-                            </div>
-                            <div class="rule_weekday">
-                                <label>F</label>
-                                <input type="checkbox" id = "Friday2">
-                            </div>
-                            <div class="rule_weekday">
-                                <label>S</label>
-                                <input type="checkbox" id = "Saturday2">
-                            </div>
-                        </div>
-                    </form>
-                </li>
-                <li>
-                    <form class="rule">
-                        <div class="rules_form">
-                            <div class="From">
-                                <h3>From</h3>
-                                <input type="date">
-                                <input type="time">
-                            </div>
-                            <div class="To">
-                                <h3>To</h3>
-                                <input type="date">
-                                <input type="time">
-                            </div>
-                            <div class = "checkbox">
-                                <input type="checkbox">
-                            </div>
-                            <div class = "image">
-                                <input type="image" src="images/delete.png" alt="delete rule">
-                            </div>
-                        </div>
-                        <div class="weekday_rules">
-                            <div class="on">
-                                <h3>On</h3>
-                            </div>
-                            <div class="rule_weekday">
-                                <label class = "ruleday_label">S</label>
-                                <input type="checkbox" id = "Sunday3">
-                            </div>
-                            <div class="rule_weekday">
-                                <label class = "ruleday_label">M</label>
-                                <input type="checkbox" id = "Monday3">
-                            </div>
-                            <div class="rule_weekday">
-                                <label>T</label>
-                                <input type="checkbox" id = "Tuesday3">
-                            </div>
-                            <div class="rule_weekday">
-                                <label>W</label>
-                                <input type="checkbox" id = "Wednesday3">
-                            </div>
-                            <div class="rule_weekday">
-                                <label>T</label>
-                                <input type="checkbox" id = "Thursday3">
-                            </div>
-                            <div class="rule_weekday">
-                                <label>F</label>
-                                <input type="checkbox" id = "Friday3">
-                            </div>
-                            <div class="rule_weekday">
-                                <label>S</label>
-                                <input type="checkbox" id = "Saturday3">
-                            </div>
-                        </div>
-                    </form>
-                </li>
+            </div>
+            <ul class = "scroll-list" id = "schedule_rules_scroll_list">
+                
             </ul>
         </section>
         <footer>
@@ -215,5 +51,6 @@
     <script src = "login_identifier.js"></script>
     <script src = "redirect.js"></script>
     <script src = "logout_redirect.js"></script>
+    <script src = "schedule-rules.js"></script>
 </body>
 </html>

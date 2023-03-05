@@ -20,51 +20,23 @@
         </header>
         <section class = "main" id = "activity-scheduler">
             <ul class = "scroll-list" id = "other_activity_members">
-                <li>
-                    <form>
-                        <label>Person 1</label>
-                        <input id="Person 1" type="checkbox"></input>
-                    </form>
-                </li>
-                <li>
-                    <form>
-                        <label>Person 2</label>
-                        <input id="Person 2" type="checkbox"></input>
-                    </form>
-                </li>
-                <li>
-                    <form>
-                        <label>Person 3</label>
-                        <input id="Person 3" type="checkbox"></input>
-                    </form>
-                </li>
+                
             </ul>
-            <form class="title" id="activity_scheduler_title">
+            <div class="title" id="activity_scheduler_title">
                 <p>Activity Scheduler</p>
                 <input type = "date" id = "activity_date"/>
                 <input type = "time" id = "activity_time"/>
-            </form>
+            </div>
             <ul class = "scroll-list" id = "activity_times">
-                <li>
-                    <form>
-                        <label>11:30 am</label>
-                        <input type = "image" src = "images/output-onlinepngtools-add.png" alt="create activity">
-                    </form>
-                </li>
-                <li>
-                    <form>
-                        <label>12:00 pm</label>
-                    </form>
-                </li>
             </ul>
         </section>
-        <section class = "create_activity">
-            <form>
+        <section class = "create_activity" id = "create_activity">
+            <div>
                 <h1 class = "title">Create Activity</h1>
                 <div class = "activity_details">
                     <label>Start</label>
                     <label id = "activity_start">1/1 11:30 pm</label>
-                    <label>End</label>
+                    <label id = "end_label">End</label>
                     <input type = "time" id = "activity_end">
                     <label>Description</label>
                     <input type = "text" id = "activity_description">
@@ -74,10 +46,10 @@
                     <p id = "activity_participants">This is a list of people</p>
                 </div>
                 <div class = "activity_buttons">
-                    <button id = "activity_cancel">Cancel</button>
-                    <button id = "activity_create">Create Event</button>
+                    <button id = "activity_cancel" onclick = "cancelActivityCreation()">Cancel</button>
+                    <button id = "activity_create" onclick = "finishCreatingEvent()">Create Event</button>
                 </div>
-            </form>
+            </div>
         </section>
         <footer>
             <div class = "copywrite">
@@ -97,5 +69,6 @@
     <script src = "login_identifier.js"></script>
     <script src = "redirect.js"></script>
     <script src = "logout_redirect.js"></script>
+    <script src = "activity-scheduler.js"></script>
 </body>
 </html>

@@ -43,20 +43,21 @@ const finalizeAccountDeletion = () => {
         console.log(res.user);
         db.collection("users").doc(email).delete().then((res) => {
             console.log(res);
+            auth.currentUser.delete().then((res) => {
+                console.log("account removed");
+            })
+            .catch((err) => {
+                if (err.code = "auth/requires-recent-login") {
+                    alert("Please sign out and sign back in");
+                }
+                console.log(err.code);
+                console.log(err.message);
+            });
         })
         .catch((err) => {
             console.log(err);
         });
-        auth.currentUser.delete().then((res) => {
-            console.log("account removed");
-        })
-        .catch((err) => {
-            if (err.code = "auth/requires-recent-login") {
-                alert("Please sign out and sign back in");
-            }
-            console.log(err.code);
-            console.log(err.message);
-        });
+        
     })
     .catch((err) => {
         console.log(err.code);

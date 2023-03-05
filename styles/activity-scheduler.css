@@ -289,12 +289,12 @@ button {
 #other_activity_members {
   height: 120px;
 }
-#other_activity_members li form {
+#other_activity_members li div {
   display: grid;
   grid-template-columns: 3fr 1fr;
   border-bottom: 1px solid black;
 }
-#other_activity_members li form label {
+#other_activity_members li div label {
   font-size: 1.2em;
   margin-left: 20px;
 }
@@ -313,16 +313,16 @@ button {
 #activity_times {
   height: 200px;
 }
-#activity_times li form {
+#activity_times li div {
   display: grid;
   grid-template-columns: 3fr 1fr;
   border-bottom: 1px solid black;
 }
-#activity_times li form label {
+#activity_times li div label {
   font-size: 1.2em;
   margin-left: 20px;
 }
-#activity_times li form input {
+#activity_times li div input {
   width: 20px;
 }
 /*activity scheduler create activity*/

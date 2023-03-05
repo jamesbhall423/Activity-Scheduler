@@ -1,7 +1,5 @@
 test_redirect = (user) => {
     if (!user) {
-        console.log("Hello");
-        console.log(user);
         redirect("index.html");
     } else {
         initializeUserData();
