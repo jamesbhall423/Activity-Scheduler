@@ -383,3 +383,6 @@ button {
 #finalizeDeletion {
   display: none;
 }
+#instructions_button {
+  text-decoration: none;
+}
