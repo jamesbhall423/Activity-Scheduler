@@ -14,6 +14,7 @@ function deleteEvent(event_id) {
         }).catch((err) => {
             console.log(err);
         });
+        setEventCenterLinkHighlight(res.data().events, res.data().events_seen, event_list);
     }).catch((err) => {
         console.log(err);
     });
@@ -50,6 +51,7 @@ function buildFromDatabase(user) {
         }).catch((err) => {
             console.log(err);
         });
+        setEventCenterLinkHighlight(events, events, events_deleted);
     }).catch((err) => {
         console.log(err);
     });

@@ -8,7 +8,7 @@ function addInputRule() {
     db.collection("users").doc(user_email).get().then((res) => {
         var data = res.data();
         var ruleset = data.rules;
-        var rule = {"days": {"Sunday": false,"Monday": false,"Tuesday": false,"Wednesday": false,"Thursday": false,"Friday": false,"Saturday": false}};
+        var rule = {"days": {"Sunday": false,"Monday": false,"Tuesday": false,"Wednesday": false,"Thursday": false,"Friday": false,"Saturday": false, "isActive": true}};
         var ruleIndex = 0;
         while (ruleset[ruleIndex]) {
             ruleIndex++;
@@ -53,6 +53,9 @@ function addRuleToPage(rules) {
     Object.entries(rules).map((rule, index) => addRuleHTML(index, rules[index]));
 }
 function addRuleHTML(ruleKey, rule) {
+    if (!rule) {
+        return;
+    }
     var openingHTML = '<div class="rule" id = "rulediv'+ruleKey+'"> <div class = "rules_form">';
     var fromHTML = '<div class="From"><h3>From</h3><input type="date" id = "fromDate'+ruleKey+'"><input type="time" id = "fromTime'+ruleKey+'"></div>';
     var toHTML = '<div class="To"><h3>To</h3><input type="date" id = "toDate'+ruleKey+'"><input type="time" id = "toTime'+ruleKey+'"></div>';

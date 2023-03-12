@@ -1,7 +1,16 @@
 userData = [];
 otherDocs = [];
 const WEEKDAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 const DISPLAYTIMES = getDisplayTimes();
+const OTHER_ACCESS_EMPTY_MESSAGE = "No other users registered. Click to authorize and connect with your buddies";
+const OTHER_ACCESS_NOT_RETURNED_MESSAGE = "None of your buddies returned your authorization. Click to check on their status.";
+const SCHEDULE_AVAILABILITY_UNDEFINED_MESSAGE = "Please set up your availability before continuing";
+const SCHEDULE_DATE_UNDEFINED_MESSAGE = "Enter a date and time to search for times that work for everyone";
+const NO_AVAILABILITY_MESSAGE = "No available slots on the given date";
+const MAX_DATE_NUM = 99999999;
+const MAX_TIME_NUM = 9999;
+var monthIndex = getCurrentMonth();
 function getDisplayTimes() {
     var output = [];
     for (var hour = 0; hour < 24; hour++) {
@@ -11,29 +20,40 @@ function getDisplayTimes() {
     return output;
 }
 
-function dateToNumber(string) {
-    var sections = string.split("-");
-    return parseInt(sections[0]+sections[1]+sections[2]);
+function dateToNumber(string, defaultVal) {
+    if (string) {
+        var sections = string.split("-");
+        return parseInt(sections[0]+sections[1]+sections[2]);
+    } else {
+        return defaultVal;
+    }
 }
-function timeToNumber(string) {
-    var sections = string.split(":");
-    return parseInt(sections[0]+sections[1]);
+function timeToNumber(string, defaultVal) {
+    if (string) {
+        var sections = string.split(":");
+        return parseInt(sections[0]+sections[1]);
+    } else {
+        return defaultVal;
+    }
 }
 function numberToTime(num) {
     var time = Math.floor(num/100).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})+":"+(num%100).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
     return time;
 }
 function dateChronological(date1,date2) {
-    return dateToNumber(date2) >= dateToNumber(date1);
+    return dateToNumber(date2, MAX_DATE_NUM) >= dateToNumber(date1, 0);
 }
 function timeChronological(time1,time2) {
-    return timeToNumber(time2) >= timeToNumber(time1);
+    return timeToNumber(time2, MAX_TIME_NUM) >= timeToNumber(time1, 0);
 }
 
 function ruleContains(rule, date, time, weekday) {
     return ruleContainsDate(rule, date, weekday) && timeChronological(rule.fromTime,time) && timeChronological(time, rule.toTime);
 }
 function ruleContainsDate(rule, date, weekday) {
+    if (!rule) {
+        return false;
+    }
     return dateChronological(rule.fromDate,date) && dateChronological(date, rule.toDate) && rule["days"][weekday] && rule.isActive;
 }
 function validRules(ruleSet, date, time, weekday) {
@@ -58,15 +78,17 @@ function getWeekday(date, time) {
     return weekday;
 }
 function redisplayItems() {
-    var date = document.getElementById("activity_date").value;
+    var date = document.getElementById("activity_date").textContent;
     var time = document.getElementById("activity_time").value;
-    if (date && time) {
+    if (date && time && date != "Set Date") {
         document.getElementById("activity_times").textContent="";
         var weekday = getWeekday(date, time);
         if (dateSatisfiesAllActiveUsers(date, weekday)) {
             DISPLAYTIMES.filter((displayTime) => timeChronological(time, displayTime)).map((displayTime) => {
                 addTimeHTML(displayTime, dateTimeSatisfiesAllActiveUsers(date, displayTime, weekday));
             });
+        } else {
+            buildScheduleInstructions(NO_AVAILABILITY_MESSAGE);
         }
     }
 }
@@ -95,7 +117,7 @@ function activeUsers() {
     return output;
 }
 function createActivity(startTime) {
-    var date = document.getElementById("activity_date").value;
+    var date = document.getElementById("activity_date").textContent;
     document.getElementById("activity-scheduler").style.display = "none";
     document.getElementById("create_activity").style.display = "block";
     document.getElementById("activity_start").textContent = date+"\t"+toRegularTime(startTime);
@@ -119,7 +141,7 @@ function activeDataItems() {
 function getLatestEndTime(date, startTime) {
     return numberToTime(Math.min(... activeDataItems().map((data) => {
         return Math.max(... validRules(data.rules,date,startTime,getWeekday(date,startTime)).map((rule) => {
-            return timeToNumber(rule.toTime);
+            return timeToNumber(rule.toTime,MAX_TIME_NUM);
         }));
     })));
 }
@@ -154,6 +176,7 @@ function updateUserEventData(email, eventId) {
     db.collection("users").doc(email).get().then((res) => {
         var events = res.data().events;
         events.push(eventId);
+        setEventCenterLinkHighlight(events, res.data().events_seen, res.data().events_deleted);
         db.collection("users").doc(email).update({"events": events}).then((res) => {
             console.log("Data updated");
         })
@@ -170,22 +193,26 @@ function addUserHTML(other_email) {
     scrollList.appendChild(toAdd);
 }
 function addOtherUsersToPage(other_emails) {
-    const email = auth.currentUser.email;
-    db.collection("users")
-    .where("other_access","array-contains",email)
-    .get()
-    .then((res) => {
-        otherDocs = res.docs.filter((item)=> other_emails.includes(item.id));
-        var docIDs = res.docs.map((item) => item.id);
-        other_emails.map((other_email) => {
-            if (docIDs.includes(other_email)) {
-                addUserHTML(other_email);
+    if (other_emails.length == 0) {
+        buildOtherUserInstructions(OTHER_ACCESS_EMPTY_MESSAGE);
+    } else {
+        const email = auth.currentUser.email;
+        db.collection("users")
+        .where("other_access","array-contains",email)
+        .get()
+        .then((res) => {
+            otherDocs = res.docs.filter((item)=> other_emails.includes(item.id));
+            var docIDs = res.docs.map((item) => item.id);
+            var toAdd = other_emails.filter((other_email) => docIDs.includes(other_email));
+            toAdd.map((other_email) => addUserHTML(other_email));
+            if (toAdd.length == 0) {
+                buildOtherUserInstructions(OTHER_ACCESS_NOT_RETURNED_MESSAGE);
             }
+        })
+        .catch((err) => {
+            console.log(err);
         });
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+    }
 }
 function buildFromDatabase(user) {
     const user_email = user.email;
@@ -194,11 +221,102 @@ function buildFromDatabase(user) {
         other_access = data.other_access;
         userData = data;
         addOtherUsersToPage(other_access);
+        if (data.rules.length == 0) {
+            buildScheduleInstructionLink(SCHEDULE_AVAILABILITY_UNDEFINED_MESSAGE);
+        } else {
+            buildScheduleInstructions(SCHEDULE_DATE_UNDEFINED_MESSAGE);
+        }
     }).catch((err) => {
         console.log(err);
+        if (err) {
+            buildOtherUserInstructions(OTHER_ACCESS_EMPTY_MESSAGE);
+            buildScheduleInstructionLink(SCHEDULE_AVAILABILITY_UNDEFINED_MESSAGE);
+        }
     });
-    document.getElementById("activity_date").addEventListener("change",redisplayItems);
     document.getElementById("activity_time").addEventListener("change",redisplayItems);
+}
+function buildOtherUserInstructions(message) {
+    toAddElement = document.createElement("p");
+    toAddElement.innerHTML = '<a href = "other-users.html" class = "special_instructions_link">'+message+'</a>';
+    document.getElementById("other_activity_members").appendChild(toAddElement);
+}
+function buildScheduleInstructionLink(message) {
+    toAddElement = document.createElement("p");
+    toAddElement.innerHTML = '<a href = "schedule-rules.html" class = "special_instructions_link">'+message+'</a>';
+    document.getElementById("activity_times").appendChild(toAddElement);
+}
+function buildScheduleInstructions(message) {
+    toAddHTML = '<p class = "special_instructions_link">'+message+'</p>';
+    document.getElementById("activity_times").innerHTML = toAddHTML;
+}
+function getCurrentMonth() {
+    return new Date().getMonth();
+}
+function buildDateDisplay() {
+    var currentTime = new Date();
+    var year = currentTime.getFullYear();
+    if (monthIndex < currentTime.getMonth()) {
+        year+=1;
+    }
+    document.getElementById("event_creation_year").textContent = year;
+    document.getElementById("event_creation_month").textContent = MONTHS[monthIndex];
+    var days_week_start = new Date(year,monthIndex,1).getDay();
+    var days_in_month = new Date(year, monthIndex+1, 0).getDate();
+    var days_in_prior_month = new Date(year, monthIndex, 0).getDate();
+    var toAddHTML = "";
+    for (let i = days_in_prior_month-days_week_start; i < days_in_prior_month; i++) {
+        args = "'"+getDateString(year, monthIndex-1, i+1)+"'";
+        toAddHTML += '<button onclick = "setDate('+args+')" class = "priorMonthDateButton';
+        toAddHTML += addRuleSatisfactionClassHTML(monthIndex-1,i+1,year);
+        toAddHTML += '">'+(i+1)+'</button>';
+    }
+    for (let i = 1; i <= days_in_month; i++) {
+        args = "'"+getDateString(year, monthIndex, i)+"'";
+        toAddHTML += '<button onclick = "setDate('+args+')" class = "';
+        toAddHTML += addRuleSatisfactionClassHTML(monthIndex,i,year);
+        toAddHTML += '">'+i+'</button>';
+    }
+    document.getElementById("event_creation_day").innerHTML = toAddHTML;
+}
+function addRuleSatisfactionClassHTML(month, day, year) {
+    var date = new Date(year, month, day);
+    var weekday = WEEKDAYS[date.getDay()];
+    var dateString = getDateString(year, month, day);
+    if (dateSatisfiesAllActiveUsers(dateString, weekday)) {
+        return "";
+    } else {
+        return ' irrelevantMonthDateButton';
+    }
+
+}
+function setDate(dateString) {
+    document.getElementById("activity_date").textContent = dateString;
+    redisplayItems();
+    cancelSetDate();
+}
+function getDateString(year, month, day) {
+    var date = new Date(year, month, day);
+    return date.getFullYear()+"-"+(date.getMonth()+1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})+"-"+date.getDate().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+}
+function cancelSetDate() {
+    document.getElementById("date-display").style.display = "none";
+    document.getElementById("activity-scheduler").style.display = "block";
+}
+function prevMonth() {
+    monthIndex -= 1;
+    if (monthIndex<0) {
+        monthIndex += 12;
+    }
+    buildDateDisplay(monthIndex);
+}
+function nextMonth() {
+    monthIndex = (monthIndex+1) % 12;
+    buildDateDisplay(monthIndex);
+}
+function dateWindow() {
+    buildDateDisplay();
+    document.getElementById("activity-scheduler").style.display = "none";
+    document.getElementById("date-display").style.display = "block";
 }
 if (auth.currentUser) {
     buildFromDatabase(auth.currentUser);

@@ -13,8 +13,8 @@
             <nav class="main_nav">
                 <a href="activity-scheduler.html">Activity Scheduler</a>
                 <a href="other-users.html">Other Users</a>
-                <a href="schedule-rules.html">Schedule Rules</a>
-                <a href="notification-center.html">Event Center</a>
+                <a href="schedule-rules.html">Schedule Availability</a>
+                <a id = "schedule_rules_link" href="notification-center.html">Event Center</a>
                 <a href="account.html">Account Info</a>
             </nav> 
         </header>
@@ -24,7 +24,7 @@
             </ul>
             <div class="title" id="activity_scheduler_title">
                 <p>Activity Scheduler</p>
-                <input type = "date" id = "activity_date"/>
+                <button id = "activity_date" onclick = "dateWindow()">Set Date</button>
                 <input type = "time" id = "activity_time"/>
             </div>
             <ul class = "scroll-list" id = "activity_times">
@@ -50,6 +50,18 @@
                     <button id = "activity_create" onclick = "finishCreatingEvent()">Create Event</button>
                 </div>
             </div>
+        </section>
+        <section class = "date-display" id = "date-display">
+            <h1 class = "title">Select a Date</h1>
+            <h1 class = "title" id = "event_creation_year">2022</h1>
+            <div class = "month_header">
+                <button id = "prev_button" onclick = "prevMonth()">prev</button>
+                <p class = "title" id = "event_creation_month">September</p>
+                <button id = "next_button" onclick = "nextMonth()">next</button>
+            </div>
+            <div class = "date_month_days" id = "event_creation_day">
+            </div>
+            <button onclick = "cancelSetDate()">Back</button>
         </section>
         <footer>
             <div class = "copywrite">

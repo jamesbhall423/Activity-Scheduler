@@ -102,3 +102,27 @@ function toMilitaryTime(regularTime) {
   }
   return hour.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) +":"+clockSections[1];
 }
+
+function setEventCenterLinkHighlight(events, events_seen, events_deleted) {
+  if (events.length > events_seen.length) {
+    document.getElementById("schedule_rules_link").className = "event_link_main_highlight";
+  } else if (events.length > events_deleted.length) {
+    document.getElementById("schedule_rules_link").className = "event_link_minor_highlight";
+  } else {
+    document.getElementById("schedule_rules_link").className = "";
+  }
+}
+function testEventCenterLinks(user) {
+  if (user) {
+    const user_email = user.email;
+    db.collection("users").doc(user_email).get().then((res) => {
+        var data = res.data();
+        setEventCenterLinkHighlight(data.events,data.events_seen,data.events_deleted);
+    }).catch((err) => {
+        console.log(err);
+    });
+  }
+}
+if (document.getElementById("schedule_rules_link")) {
+  firebase.auth().onAuthStateChanged(testEventCenterLinks);
+}

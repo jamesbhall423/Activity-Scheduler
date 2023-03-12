@@ -28,6 +28,9 @@ Fonts are separated by a & */
   --nav-hover-background-color: #001701;
 }
 
+.special_instructions_link {
+  font-size: 1.6em;
+}
 img {
   width: 40px;
 }
@@ -66,13 +69,18 @@ nav a {
   text-decoration: none;
   padding: 5px;
   text-decoration: underline;
-}
-nav a:link, nav a:visited {
   color: var(--nav-link-color);
 }
 nav a:hover {
   color: var(--nav-hover-link-color);
   background-color: var(--nav-hover-background-color);
+}
+.event_link_main_highlight {
+  color: var(--nav-background-color);
+  background-color: var(--nav-link-color);
+}
+.event_link_minor_highlight {
+  color: var(--nav-hover-link-color);
 }
 .title {
   font-size: 1.5em;
@@ -333,11 +341,58 @@ button {
   width: 20px;
 }
 /*activity scheduler create activity*/
-/*#activity-scheduler {
+/* #activity-scheduler {
   display: none;
-}*/
+} */
 .create_activity {
   display: none;
+}
+.priorMonthDateButton {
+  color: var(--secondary-color);
+}
+.irrelevantMonthDateButton {
+  border: none;
+  background-color: var(--primary-color);
+}
+.date-display {
+  display: none;
+}
+#activity_date {
+  margin: 0;
+  padding: 0;
+  height: 2em;
+}
+#event_creation_year {
+  margin-top: 5px;
+}
+.month_header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+.month_header button {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  width: 100%;
+}
+#event_creation_month {
+  height: 2em;
+  align-self: center;
+  padding-top: 0.6em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+.date_month_days {
+  margin-top: 0px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.date_month_days button {
+  width: 100%;
+  height: 2em;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 .activity_details input {
   width: 95%;
