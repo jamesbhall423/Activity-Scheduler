@@ -7,6 +7,22 @@ const firebaseConfig = {
   appId: "1:309597686543:web:33c1353919850c56ea8c7a",
   measurementId: "G-3R95HWSPJG"
 };
+const actionCodeSettings = {
+  // URL you want to redirect back to. The domain (www.example.com) for this
+  // URL must be in the authorized domains list in the Firebase Console.
+  url: 'https://jamesbhall423.github.io/',
+  // This must be true.
+  handleCodeInApp: true,
+  iOS: {
+    bundleId: 'com.example.ios'
+  },
+  android: {
+    packageName: 'com.example.android',
+    installApp: true,
+    minimumVersion: '12'
+  },
+  dynamicLinkDomain: 'example.page.link'
+};
 
 const app = firebase.initializeApp(firebaseConfig);
 const db = app.firestore();
@@ -27,7 +43,11 @@ function shortenUserEventList(data, eventList, use_event_ids, email) {
     var shortened_events = eventList.filter((event_id)=>use_event_ids.includes(event_id));
     var shortened_events_seen = data.events_seen.filter((event_id)=>use_event_ids.includes(event_id));
     var shortened_events_deleted = data.events_deleted.filter((event_id)=>use_event_ids.includes(event_id));
-    db.collection("users").doc(email).update({"events": shortened_events, "events_seen": shortened_events_seen, "events_deleted": shortened_events_deleted}).catch((err)=> {console.log(err);});
+    var shortened_event_rules = [];
+    if (data.eventRules) {
+      shortened_event_rules = data.eventRules.filter((eventRule) => use_event_ids.includes(eventRule.eventID) && !shortened_events_deleted.includes(eventRule.eventID));
+    }
+    db.collection("users").doc(email).update({"events": shortened_events, "events_seen": shortened_events_seen, "events_deleted": shortened_events_deleted, "eventRules": shortened_event_rules}).catch((err)=> {console.log(err);});
   }
 }
 

@@ -1,5 +1,6 @@
 userData = [];
 otherDocs = [];
+currentEventData = {}; // Rule that event data be treated as negative rule conflicts somewhat with rule that other users do not have access to each others' event data.
 const WEEKDAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 const DISPLAYTIMES = getDisplayTimes();
@@ -11,6 +12,30 @@ const NO_AVAILABILITY_MESSAGE = "No available slots on the given date";
 const MAX_DATE_NUM = 99999999;
 const MAX_TIME_NUM = 9999;
 var monthIndex = getCurrentMonth();
+function getRules(data) {
+    output = [];
+    for (let rule of data.rules) {
+        output.push(rule);
+    }
+    if (data.eventRules) {
+        for (let rule of data.eventRules) {
+            output.push(rule);
+        }
+    }
+    return output;
+}
+function getEventRule(date, startTime, endTime, eventID) {
+    rule = {};
+    rule["days"] = {"Sunday": true, "Monday": true, "Tuesday": true, "Wednesday": true, "Thursday": true, "Friday": true, "Saturday": true};
+    rule["fromDate"] = date;
+    rule["toDate"] = date;
+    rule["fromTime"] = startTime;
+    rule["toTime"] = endTime;
+    rule["isActive"] = true;
+    rule["negSelect"] = "negative";
+    rule["eventID"] = eventID;
+    return rule;
+}
 function getDisplayTimes() {
     var output = [];
     for (var hour = 0; hour < 24; hour++) {
@@ -59,18 +84,36 @@ function ruleContainsDate(rule, date, weekday) {
 function validRules(ruleSet, date, time, weekday) {
     return ruleSet.filter((rule)=>ruleContains(rule,date,time,weekday));
 }
+function ruleStartsAfter(rule,date,time,weekday) {
+    return ruleContainsDate(rule, date, weekday) && timeChronological(time,rule.fromTime);
+}
+function rulesStartingAfter(ruleSet, date, time, weekday) {
+    return ruleSet.filter((rule)=>ruleStartsAfter(rule,date,time,weekday));
+}
 function atLeastOneRuleContains(ruleSet, date, time, weekday) {
     var output = validRules(ruleSet, date, time, weekday);
     return output.length>0;
 }
+function isNegativeRule(rule) {
+    return rule && rule.negSelect && rule.negSelect == "negative";
+}
+function positiveRules(ruleSet) {
+    return ruleSet.filter((rule) => !isNegativeRule(rule));
+}
+function negativeRules(ruleSet) {
+    return ruleSet.filter((rule) => isNegativeRule(rule));
+}
 function dateTimeSatisfiesAllActiveUsers(date, time, weekday) {
-    return atLeastOneRuleContains(userData.rules, date, time, weekday) && otherDocs.filter((doc)=>{return document.getElementById("using_"+doc.id).checked&&!atLeastOneRuleContains(doc.data().rules,date, time, weekday)}).length==0;
+    if (atLeastOneRuleContains(negativeRules(getRules(userData)), date, time, weekday) || otherDocs.filter((doc)=>{return document.getElementById("using_"+doc.id).checked&&atLeastOneRuleContains(negativeRules(getRules(doc.data())),date, time, weekday)}).length>0) {
+        return false;
+    }
+    return atLeastOneRuleContains(positiveRules(getRules(userData)), date, time, weekday) && otherDocs.filter((doc)=>{return document.getElementById("using_"+doc.id).checked&&!atLeastOneRuleContains(positiveRules(getRules(doc.data())),date, time, weekday)}).length==0;
 }
 function atLeastOneRuleContainsDate(ruleSet, date, weekday) {
     return ruleSet.filter((rule)=>ruleContainsDate(rule,date,weekday)).length>0;
 }
 function dateSatisfiesAllActiveUsers(date, weekday) {
-    return atLeastOneRuleContainsDate(userData.rules, date, weekday) && otherDocs.filter((doc)=>{return document.getElementById("using_"+doc.id).checked&&!atLeastOneRuleContainsDate(doc.data().rules,date, weekday)}).length==0;
+    return atLeastOneRuleContainsDate(positiveRules(getRules(userData)), date, weekday) && otherDocs.filter((doc)=>{return document.getElementById("using_"+doc.id).checked&&!atLeastOneRuleContainsDate(positiveRules(getRules(doc.data())),date, weekday)}).length==0;
 }
 function getWeekday(date, time) {
     var dateObj = new Date(date+" "+time);
@@ -138,12 +181,30 @@ function activeDataItems() {
     items.push(userData);
     return items;
 }
-function getLatestEndTime(date, startTime) {
+function getFirstListedNegativeTime(date, startTime) {
     return numberToTime(Math.min(... activeDataItems().map((data) => {
-        return Math.max(... validRules(data.rules,date,startTime,getWeekday(date,startTime)).map((rule) => {
+        var out = Math.max(... rulesStartingAfter(negativeRules(getRules(data)),date,startTime,getWeekday(date,startTime)).map((rule) => {
+            var out2 = timeToNumber(rule.fromTime,MAX_TIME_NUM);
+            return out2;
+        }));
+        if (out<0) {
+            return MAX_TIME_NUM;
+        }
+        return out;
+    })));
+}
+function getLatestEndTime(date, startTime) {
+    var negEndTime = getFirstListedNegativeTime(date, startTime);
+    var posEndTime = numberToTime(Math.min(... activeDataItems().map((data) => {
+        return Math.max(... validRules(positiveRules(data.rules),date,startTime,getWeekday(date,startTime)).map((rule) => {
             return timeToNumber(rule.toTime,MAX_TIME_NUM);
         }));
     })));
+    if (negEndTime < posEndTime) {
+        return negEndTime;
+    } else {
+        return posEndTime;
+    }
 }
 function cancelActivityCreation() {
     document.getElementById("create_activity").style.display = "none";
@@ -162,8 +223,10 @@ function finishCreatingEvent() {
         var description = document.getElementById("activity_description").value;
         var users = activeUsers();
         db.collection("events").add({"people": users, "date": date, "startTime": startTime, "endTime": endTime, "description": description}).then((res) => {
-            eventId = res.id;
-            users.map((email)=>updateUserEventData(email, eventId));
+            var eventRule = getEventRule(date,startTime,endTime,res.id);
+            userData.eventRules.push(eventRule);
+            users.map((email)=>updateUserEventData(email, eventRule));
+            redisplayItems();
         }).catch((err) => {
             console.log(err);
         });
@@ -172,12 +235,18 @@ function finishCreatingEvent() {
     }
     
 }
-function updateUserEventData(email, eventId) {
+function updateUserEventData(email, eventRule) {
     db.collection("users").doc(email).get().then((res) => {
-        var events = res.data().events;
-        events.push(eventId);
-        setEventCenterLinkHighlight(events, res.data().events_seen, res.data().events_deleted);
-        db.collection("users").doc(email).update({"events": events}).then((res) => {
+        var data = res.data();
+        var events = data.events;
+        var eventRules = data.eventRules;
+        if (!eventRules) {
+            eventRules = [];
+        }
+        eventRules.push(eventRule);
+        events.push(eventRule.eventID);
+        setEventCenterLinkHighlight(events, data.events_seen, data.events_deleted);
+        db.collection("users").doc(email).update({"events": events, "eventRules": eventRules}).then((res) => {
             console.log("Data updated");
         })
         .catch((err) => {

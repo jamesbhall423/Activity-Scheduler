@@ -183,7 +183,10 @@ footer {
   display: grid;
   grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   margin-right: 5px;
+}
+.ruleElement {
   border-bottom: 1px solid black;
+  border-top: 1px solid black;
 }
 .weekday_rules h3 {
   align-self: center;
@@ -436,6 +439,9 @@ button {
   height: 100%;
 }
 #finalizeDeletion {
+  display: none;
+}
+#finalizePasswordChange {
   display: none;
 }
 #instructions_button {

@@ -69,3 +69,28 @@ const cancelDeletion = () => {
     document.getElementById("finalizeDeletion").style.display = "none";
     document.getElementById("account").style.display = "block";
 }
+function resetPassword() {
+    auth.sendPasswordResetEmail(auth.currentUser.email);
+    document.getElementById("finalizePasswordChange").style.display = "block";
+    document.getElementById("account").style.display = "none";
+}
+function cancelPasswordChange() {
+    document.getElementById("finalizePasswordChange").style.display = "none";
+    document.getElementById("account").style.display = "block";
+}
+function loginEmailLink() {
+    const email = document.getElementById("Email").value;
+    window.localStorage.setItem("emailForSignIn", email);
+    // Confirm the link is a sign-in with email link.
+    firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings).then(() => {
+    // The link was successfully sent. Inform the user.
+    // Save the email locally so you don't need to ask the user for it again
+    // if they open the link on the same device.
+    window.localStorage.setItem('emailForSignIn', email);
+    // ...
+    }).catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+       console.log(errorCode, errorMessage)
+    });
+}

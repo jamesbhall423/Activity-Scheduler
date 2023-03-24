@@ -1,4 +1,6 @@
 const WEEKDAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const POSITIVE_RULE_MESSAGE = "Available unless stated otherwise";
+const NEGATIVE_RULE_MESSAGE =  "Not available, even if stated otherwise";
 function remove(elementID) {
     removeFromDatabase(elementID);
     removeFromHTML(elementID);
@@ -77,12 +79,15 @@ function addRuleHTML(ruleKey, rule) {
             weekdayHTML += ' checked=true';
         }
         weekdayHTML += ' id = "'+day+ruleKey+'"></div>';
-    });                     
+    });    
+    var selectElement = getSelectElement(ruleKey, rule);                 
     var closingHTML = '</div></div>';
     var toAddHTML = openingHTML+fromHTML+toHTML+activeHTML+removeHTML+weekdayTransitionHTML+weekdayHTML+closingHTML;
     var toAdd = document.createElement("li");
     toAdd.id = "rule"+ruleKey;
     toAdd.innerHTML = toAddHTML;
+    toAdd.appendChild(selectElement);
+    toAdd.classList.add("ruleElement");
     var scrollList = document.getElementById("schedule_rules_scroll_list");
     scrollList.appendChild(toAdd);
     var dateTimeTypes = ["fromDate","toDate","fromTime","toTime"];
@@ -90,6 +95,27 @@ function addRuleHTML(ruleKey, rule) {
         document.getElementById(label+ruleKey).value = rule[label];
     });
     dateTimeTypes.map((value) => addDataListener(value,ruleKey));
+}
+function getSelectElement(ruleKey, rule) {
+    var element = document.createElement("select");
+    element.id = "negSelect"+ruleKey;
+    var positiveElement = document.createElement("option");
+    positiveElement.value = "positive";
+    positiveElement.innerHTML = POSITIVE_RULE_MESSAGE;
+    var negativeElement = document.createElement("option");
+    negativeElement.value = "negative";
+    negativeElement.innerHTML = NEGATIVE_RULE_MESSAGE;
+    if (rule.negSelect && rule.negSelect == "negative") {
+        element.appendChild(negativeElement);
+        element.appendChild(positiveElement);
+    } else {
+        element.appendChild(positiveElement);
+        element.appendChild(negativeElement);
+    }
+    element.addEventListener("change",() => {
+        updateElementInDatabase(ruleKey, "negSelect", element.value, false)
+    });
+    return element;
 }
 function addDataListener(label,index) {
     document.getElementById(label+index).addEventListener("change",() => {
