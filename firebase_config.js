@@ -1,3 +1,5 @@
+const REQUIRE_EMAIL_VERIFICATION = true;
+
 const firebaseConfig = {
   apiKey: "AIzaSyDAn3unLwDj4jQcDxw6oi7iF7teNIBTkBQ",
   authDomain: "activity-scheduler-database.firebaseapp.com",
@@ -7,21 +9,21 @@ const firebaseConfig = {
   appId: "1:309597686543:web:33c1353919850c56ea8c7a",
   measurementId: "G-3R95HWSPJG"
 };
-const actionCodeSettings = {
+var actionCodeSettings = {
   // URL you want to redirect back to. The domain (www.example.com) for this
   // URL must be in the authorized domains list in the Firebase Console.
-  url: 'https://jamesbhall423.github.io/Activity-Scheduler',
+  url: 'https://jamesbhall423.github.io/Activity-Scheduler/index.html',
   // This must be true.
   handleCodeInApp: true,
-  iOS: {
-    bundleId: 'com.example.ios'
-  },
-  android: {
-    packageName: 'com.example.android',
-    installApp: true,
-    minimumVersion: '12'
-  },
-  dynamicLinkDomain: 'example.page.link'
+  // iOS: {
+  //   bundleId: 'com.example.ios'
+  // },
+  // android: {
+  //   packageName: 'com.example.android',
+  //   installApp: true,
+  //   minimumVersion: '12'
+  // },
+  // dynamicLinkDomain: 'https://jamesbhall423.github.io/'
 };
 
 const app = firebase.initializeApp(firebaseConfig);

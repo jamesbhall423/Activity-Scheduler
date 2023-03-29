@@ -65,5 +65,27 @@ function runHackerScripts() {
         console.log("attempted fake event");
         console.log(err);
     });
+    
+    db.collection("users").doc("user1@examples.com").update({"other_access": []}).then((res)=> {
+        console.log("attempted user update");
+        console.log("This operation should not have been allowed");
+    }).catch((err)=> {
+        console.log("attempted user update");
+        console.log(err);
+    });
+    db.collection("users").doc("user1@examples.com").update({"other_ref": []}).then((res)=> {
+        console.log("attempted user update");
+        console.log("This operation should not have been allowed");
+    }).catch((err)=> {
+        console.log("attempted user update");
+        console.log(err);
+    });
+    db.collection("users").doc("user1@examples.com").update({"rules": []}).then((res)=> {
+        console.log("attempted user update");
+        console.log("This operation should not have been allowed");
+    }).catch((err)=> {
+        console.log("attempted user update");
+        console.log(err);
+    });
 }
 createHackerAccount();

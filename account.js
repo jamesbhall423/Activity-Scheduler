@@ -83,14 +83,21 @@ function loginEmailLink() {
     window.localStorage.setItem("emailForSignIn", email);
     // Confirm the link is a sign-in with email link.
     firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings).then(() => {
-    // The link was successfully sent. Inform the user.
-    // Save the email locally so you don't need to ask the user for it again
-    // if they open the link on the same device.
-    window.localStorage.setItem('emailForSignIn', email);
-    // ...
+        // The link was successfully sent. Inform the user.
+        // Save the email locally so you don't need to ask the user for it again
+        // if they open the link on the same device.
+        window.localStorage.setItem('emailForSignIn', email);
+        console.log("Email sent");
+        // ...
     }).catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
        console.log(errorCode, errorMessage)
     });
+}
+function continue_after_verification() {
+    test_redirect(auth.currentUser);
+}
+function cancel_verification() {
+    signOut();
 }

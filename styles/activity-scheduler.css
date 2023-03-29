@@ -303,6 +303,9 @@ button {
 #instructions_link {
   font-size: 2em;
 }
+#verification {
+  display: none;
+}
 /*activity scheduler*/
 #other_activity_members {
   height: 120px;
