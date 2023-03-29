@@ -21,14 +21,14 @@
                     <label for="Email">Email</label>
                     <input name="Email" id="Email" type="Email" placeholder="Email" />
                 </div>
+                <button class="email_link_button" onclick="loginEmailLink()">Login with Email link</button>
                 <div class = "labeled_input">
                     <label for="Password">Password</label>
                     <input name="Password" id="Password" type="Password" placeholder="Password" />
                 </div>
                 <div>
                     <button class="create_account_button" onclick="createAccount()">Create Account</button>
-                    <button class="login_button" onclick="login()">Login</button>
-                    <button class="email_link_button" onclick="loginEmailLink()">Send Email Link</button>
+                    <button class="login_button" onclick="login()">Login with Email</button>
                 </div>
             </div>
         </section>
@@ -36,6 +36,10 @@
             <p id="verification_email_sending_status"></p>
             <button id="continue_after_verification" onclick="continue_after_verification()">Continue to Site</button>
             <button id="sign_out" onclick="cancel_verification()">Cancel</button>
+        </section>
+        <section class = "main" id = "email_link_waiting">
+            <p id="email_link_waiting_status">Please check your email for sign-on-link</p>
+            <button id="cancel_waiting" onclick="cancel_email_link()">Cancel Link</button>
         </section>
         <footer>
             <div class = "copywrite">

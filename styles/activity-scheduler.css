@@ -306,6 +306,9 @@ button {
 #verification {
   display: none;
 }
+#email_link_waiting {
+  display: none;
+}
 /*activity scheduler*/
 #other_activity_members {
   height: 120px;
