@@ -99,5 +99,7 @@ function continue_after_verification() {
     test_redirect(auth.currentUser);
 }
 function cancel_verification() {
-    signOut();
+    logout();
+    signIn.style.display = "grid";
+    verification.style.display = "none";
 }
