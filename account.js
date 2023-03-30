@@ -88,6 +88,8 @@ function loginEmailLink() {
         // if they open the link on the same device.
         window.localStorage.setItem('emailForSignIn', email);
         console.log("Email sent");
+        document.getElementById("signin").style.display = "none";
+        document.getElementById("email_link_waiting").style.display = "block";
         // ...
     }).catch((error) => {
         var errorCode = error.code;
@@ -100,12 +102,12 @@ function continue_after_verification() {
 }
 function cancel_verification() {
     logout();
-    document.getElementById("signIn").style.display = "grid";
+    document.getElementById("signin").style.display = "grid";
     document.getElementById("verification").style.display = "none";
 }
 function cancel_email_link() {
     window.localStorage.removeItem('emailForSignIn', email);
-    document.getElementById("signIn").style.display = "grid";
+    document.getElementById("signin").style.display = "grid";
     document.getElementById("email_link_waiting").style.display = "none";
 }
 // Confirm the link is a sign-in with email link.

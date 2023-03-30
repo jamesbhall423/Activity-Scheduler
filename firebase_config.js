@@ -1,4 +1,4 @@
-const REQUIRE_EMAIL_VERIFICATION = true;
+const REQUIRE_EMAIL_VERIFICATION = false;
 
 const firebaseConfig = {
   apiKey: "AIzaSyDAn3unLwDj4jQcDxw6oi7iF7teNIBTkBQ",
