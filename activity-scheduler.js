@@ -224,6 +224,9 @@ function finishCreatingEvent() {
         var users = activeUsers();
         db.collection("events").add({"people": users, "date": date, "startTime": startTime, "endTime": endTime, "description": description}).then((res) => {
             var eventRule = getEventRule(date,startTime,endTime,res.id);
+            if (!userData.eventRules) {
+                userData.eventRules = [];
+            }
             userData.eventRules.push(eventRule);
             users.map((email)=>updateUserEventData(email, eventRule));
             redisplayItems();
