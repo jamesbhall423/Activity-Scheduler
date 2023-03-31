@@ -453,3 +453,13 @@ button {
 #instructions_button {
   text-decoration: none;
 }
+/*video_links.html*/
+#instruction_video_links div {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+#instruction_video_links a {
+  color: var(--nav-background-color);
+  font-size: 2em;
+}
